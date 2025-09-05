@@ -49,6 +49,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 
 A preview of the main tracking screen in action. The top shows the target's name, the large arrow points in their direction, and the footer contains distance and other peer metrics.
 
+https://github.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/blob/main/cal_menu.jpg?raw=true
 
 
 ---
