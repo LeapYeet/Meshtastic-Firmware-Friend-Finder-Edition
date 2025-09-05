@@ -1,29 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Meshtastic Custom Flasher</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meshtastic Friend Finder Flasher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
-        button { font-size: 1.2em; padding: 10px 20px; margin: 10px; }
-        #log { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; text-align: left; white-space: pre-wrap; }
+        :root {
+            --bg-color: #f4f7f9;
+            --text-color: #333;
+            --primary-color: #007bff;
+            --container-bg: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        main {
+            background-color: var(--container-bg);
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+        
+        .intro {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        /* Styling the ESP Web Tools button */
+        esp-web-install-button button {
+            background-color: var(--primary-color);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        esp-web-install-button button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Heltec V3 Custom Firmware Flasher</h1>
-    <p>For testing the FriendFinder and Magnetometer modules.</p>
+
+    <main>
+        <h1>Friend Finder Firmware Flasher</h1>
+        <p class="intro">
+            Install the custom Meshtastic firmware with Friend Finder & Magnetometer support directly to your Heltec V3.
+        </p>
+        
+        <div class="button-container">
+            <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+            <esp-web-install-button manifest="firmware/manifest.json">
+                <button slot="activate">Connect & Install Firmware</button>
+            </esp-web-install-button>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Key Features</h2>
+            <ul>
+                <li><strong>Real-Time Tracking:</strong> See the distance and direction to your friends.</li>
+                <li><strong>Compass Support:</strong> Adds magnetometer support for a directional arrow.</li>
+                <li><strong>Friend Map:</strong> View all your paired friends on a map screen.</li>
+                <li><strong>Designed for the Outdoors:</strong> Perfect for festivals, skiing, and hiking.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📋 Instructions</h2>
+            <ol>
+                <li>Plug your **Heltec V3** into your computer.</li>
+                <li>Click the **Connect & Install** button above.</li>
+                <li>A pop-up will appear. Select the correct **COM/Serial Port** and click "Connect".</li>
+                <li>The installation will begin automatically. Keep this browser tab open until it's finished.</li>
+            </ol>
+        </div>
+        
+        <div class="section">
+            <h2>⚙️ Requirements</h2>
+            <p>
+                This firmware requires a **Heltec V3** with a **GPS module**. For the directional arrow to work, a **QMC5883L magnetometer** is highly recommended. For more details, please see the <a href="https://github.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition" target="_blank">project's GitHub page</a>.
+            </p>
+        </div>
+    </main>
     
-    <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+    <footer>
+      <p>
+        If you find this project useful, consider supporting its development!
+      </p>
+      <a href="https://ko-fi.com/LeapYeet" target="_blank" title="Support me on Ko-fi">
+        <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;">
+      </a>
+    </footer>
 
-    <esp-web-install-button manifest="firmware/manifest.json">
-        <button slot="activate">Connect & Install</button>
-    </esp-web-install-button>
-
-    <p>
-        <strong>Instructions:</strong>
-        <br>1. Plug in your Heltec V3.
-        <br>2. Click the button above.
-        <br>3. Select the correct COM port from the pop-up window and click "Connect".
-        <br>4. The installation will begin automatically.
-    </p>
 </body>
 </html>
