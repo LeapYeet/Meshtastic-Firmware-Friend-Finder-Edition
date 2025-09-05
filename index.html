@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meshtastic Custom Flasher</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        button { font-size: 1.2em; padding: 10px 20px; margin: 10px; }
+        #log { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; text-align: left; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>Heltec V3 Custom Firmware Flasher</h1>
+    <p>For testing the FriendFinder and Magnetometer modules.</p>
+    
+    <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+
+    <esp-web-install-button manifest="firmware/manifest.json">
+        <button slot="activate">Connect & Install</button>
+    </esp-web-install-button>
+
+    <p>
+        <strong>Instructions:</strong>
+        <br>1. Plug in your Heltec V3.
+        <br>2. Click the button above.
+        <br>3. Select the correct COM port from the pop-up window and click "Connect".
+        <br>4. The installation will begin automatically.
+    </p>
+</body>
+</html>
