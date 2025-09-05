@@ -49,7 +49,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 
 | Main Menu | Tracking (with Magnetometer) | Tracking (without Magnetometer) | Calibration Menu |
 | :---: | :---: | :---: | :---: |
-| <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/home_menu.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/tracking_with_mag.jpg" width="200"> |  | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/cal_menu.jpg" width="200"> |
+| <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/home_menu.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/tracking_with_mag.jpg" width="200"> | <img src=" https://github.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/blob/main/tracking_no_mag.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/cal_menu.jpg" width="200"> |
 | *Friend Finder on the main menu.* | *Arrow points to your friend.* | *Only the distance is displayed.* | *Easy access to compass calibration.* |
 
 ---
