@@ -1,135 +1,173 @@
-<div align="center">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meshtastic Friend Finder Flasher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f4f7f9;
+            --text-color: #333;
+            --primary-color: #007bff;
+            --container-bg: #ffffff;
+            --border-color: #e0e0e0;
+        }
 
-# Meshtastic Firmware: Friend Finder Edition
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
 
+        main {
+            background-color: var(--container-bg);
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: left;
+        }
 
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
 
-**An enhanced version of Meshtastic with real-time, compass-based friend tracking.**
+        p {
+            line-height: 1.6;
+        }
+        
+        .intro {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
 
-</div>
+        .section {
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
 
-<div align="center">
+        h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
 
-![License](https://img.shields.io/badge/License-GPL--2.0-blue.svg)
-![Version](https://img.shields.io/badge/Version-2.7--FF-brightgreen)
-![Hardware](https://img.shields.io/badge/Tested_On-Heltec_V3-orange)
-![Status](https://img.shields.io/badge/Status-Work_In_Progress-yellow)
+        ul, ol {
+            padding-left: 20px;
+        }
 
-</div>
+        li {
+            margin-bottom: 8px;
+        }
 
-This is a custom build of the official Meshtastic firmware that introduces the **Friend Finder** module. This feature allows you to pair with and track your friends in real-time. The tracking screen shows their distance, and if you have a magnetometer installed, a directional arrow makes it easy to find each other when you get separated.
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
 
-It was developed and tested in real-world conditions, including a crowded outdoor music concert, where it performed exceptionally well.
+        /* Styling the ESP Web Tools button */
+        esp-web-install-button button {
+            background-color: var(--primary-color);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
 
----
+        esp-web-install-button button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+        }
 
-## 📖 Table of Contents
+    </style>
+</head>
+<body>
 
-- [Core Features](#-core-features)
-- [UI Showcase](#-ui-showcase)
-- [Hardware Requirements](#️-hardware-requirements)
-- [Installation](#-installation)
-- [Getting Started: Setup & Usage](#-getting-started-setup--usage)
-- [Project Status & Future Goals](#-project-status--future-goals)
-- [Performance & Technical Notes](#-performance--technical-notes)
-- [License](#-license)
+    <main>
+        <h1>Friend Finder Firmware Flasher</h1>
+        <p class="intro">
+            Install the custom Meshtastic firmware with Friend Finder & Magnetometer support directly to your Heltec V3.
+        </p>
+        
+        <div class="button-container">
+            <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+            <esp-web-install-button manifest="firmware/manifest.json">
+                <button slot="activate">Connect & Install Firmware</button>
+            </esp-web-install-button>
+        </div>
 
----
+        <div class="section">
+            <h2>🚀 Key Features</h2>
+            <ul>
+                <li><strong>Real-Time Tracking:</strong> See the distance and direction to your friends.</li>
+                <li><strong>Compass Support:</strong> Adds magnetometer support for a directional arrow.</li>
+                <li><strong>Friend Map:</strong> View all your paired friends on a map screen.</li>
+                <li><strong>Designed for the Outdoors:</strong> Perfect for festivals, skiing, and hiking.</li>
+            </ul>
+        </div>
 
-## 🎯 Core Features
+        <div class="section">
+            <h2>📋 Instructions</h2>
+            <ol>
+                <li>Plug your <strong>Heltec V3</strong> into your computer.</li>
+                <li>Click the <strong>Connect & Install</strong> button above.</li>
+                <li>A pop-up will appear. Select the correct <strong>COM/Serial Port</strong> and click "Connect".</li>
+                <li>The installation will begin automatically. Keep this browser tab open until it's finished.</li>
+            </ol>
+        </div>
+        
+        <div class="section">
+            <h2>⚙️ Requirements & Source Code</h2>
+            <p>
+                This firmware requires a <strong>Heltec V3</strong> with a <strong>GPS module</strong>. For the directional arrow, a <strong>QMC5883L magnetometer</strong> is highly recommended. For more details, visit the <a href="https://github.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition" target="_blank">web flasher repository</a> or view the <a href="https://github.com/LeapYeet/firmware" target="_blank">official firmware fork</a>.
+            </p>
+        </div>
+    </main>
+    
+    <footer>
+      <p>
+        If you find this project useful, consider supporting its development!
+      </p>
+      <a href="https://ko-fi.com/LeapYeet" target="_blank" title="Support me on Ko-fi">
+        <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;">
+      </a>
+    </footer>
 
--   🛰️ **Friend Finder Module**: A new interface to securely pair with other devices and initiate a tracking session.
--   🧭 **Real-Time Tracking Screen**: Shows the live distance to your friend. With a magnetometer, it also displays a large arrow pointing in their direction.
--   🗺️ **Friend Map**: View the locations of all your paired friends simultaneously on a simple map display.
--   ⚙️ **Optional Magnetometer Support**: Includes all necessary drivers and logic to use a QMC5883L magnetometer for directional tracking.
--   🏞️ **Designed for the Outdoors**: Perfect for staying connected at festivals, while skiing, hiking, or at any large-scale event.
-
----
-
-## ✨ UI Showcase
-
-| Main Menu | Tracking (with Magnetometer) | Tracking (without Magnetometer) | Calibration Menu |
-| :---: | :---: | :---: | :---: |
-| <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/home_menu.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/tracking_with_mag.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/tracking_no_mag.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/cal_menu.jpg" width="200"> |
-| *Friend Finder on the main menu.* | *Arrow points to your friend.* | *Only the distance is displayed.* | *Easy access to compass calibration.* |
-
----
-
-## ⚙️ Hardware Requirements
-
-For the Friend Finder module to work, specific hardware is required. The firmware was built and tested on the following setup:
-
-| Component | Model / Specification | Notes |
-| :--- | :--- | :--- |
-| **Primary Device**| Heltec Wireless Tracker (V3) | Other ESP32-S3 devices may work but are untested. |
-| **GPS Module** | Any Meshtastic-compatible GPS | **Required.** Any module supported by the base firmware will work. The u-blox M8N is recommended for its high accuracy. |
-| **Magnetometer** | QMC5883L | **Highly Recommended.** The directional arrow makes finding friends in crowded spaces much easier. Other magnetometers may work but are untested. |
-
-> **IMPORTANT: Magnetometer Wiring**
-> If you choose to install a magnetometer, it **must** be connected to the primary I²C bus. Other ports were tested without success.
-> ```text
-| Magnetometer | Pin | Heltec V3 | Pin |
-| :--- | :---: | :--- | ---: |
-| **SDA** | -> | **GPIO 41** | |
-| **SCL** | -> | **GPIO 42** | |
-> ```
-
----
-
-## 💾 Installation
-
-The easiest way to install this firmware is by using the custom web flasher.
-
-### **➡️ [Install via Web Flasher](https://leapyeet.github.io/Meshtastic-Firmware-Friend-Finder-Edition/)**
-
-1.  Click the link above to open the web flasher.
-2.  Plug your Heltec V3 into your computer via USB.
-3.  Click the **Connect & Install** button.
-4.  A pop-up window will appear. Select the correct COM port for your device and click "Connect".
-5.  The installation will begin automatically. Do not unplug the device until it is complete.
-
----
-
-## 🚀 Getting Started: Setup & Usage
-
-1.  **Ensure GPS is Active**
-    * Before starting, make sure your GPS module is connected and has acquired a solid satellite lock.
-
-2.  **Calibrate the Magnetometer (If Installed)**
-    * This step is only necessary if you have a magnetometer.
-    * On the device, navigate to the main menu.
-    * Go to `Friend Finder` -> `Compass Cal`.
-    * Run both the **Figure-8 Cal** and **Flat-Spin Cal** routines, following the on-screen instructions.
-
-3.  **Pair with Friends**
-    * From the main menu, go to `Friend Finder` -> `Start Pairing`.
-    * Have your friend do the same on their device. The devices will discover each other and allow you to securely pair.
-
-4.  **Track a Friend**
-    * Navigate to `Friend Finder` -> `Track a Friend`.
-    * Select your friend from the list to begin a mutual tracking session.
-    * The device will switch to the tracking screen.
-
----
-
-## 🚧 Project Status & Future Goals
-
-Please be aware that this entire project is a **work in progress**.
-
--   **Source Code**: The source code will be made available soon for community review and contribution.
--   **End Goal**: The ultimate goal is to refine this module and merge it with the official Meshtastic firmware repository so everyone can benefit from it.
--   **Testing Needed**: Before an official merge is possible, extensive testing is required across different devices, hardware configurations, and LoRa settings. Community feedback and testing are highly encouraged!
-
----
-
-## 📡 Performance & Technical Notes
-
--   **LoRa Settings**: All testing has been conducted using the **LongFast** channel preset.
--   **Update Interval**: To keep channel utilization low, position updates are sent every **20 seconds**. Faster LoRa settings may support more frequent updates, but this requires further community testing.
--   **Range**: The effective tracking range depends entirely on your device, antenna, LoRa settings, and the surrounding environment.
-
----
-
-## 📜 License
-
-This project is a derivative work of the official Meshtastic firmware and is therefore licensed under the **GNU General Public License v2.0 (GPL-2.0)**. The original `LICENSE` file is included in the source code.
+</body>
+</html>
