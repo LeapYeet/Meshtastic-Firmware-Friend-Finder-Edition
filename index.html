@@ -99,7 +99,6 @@
             transform: translateY(-2px);
         }
         
-        /* New styles for the checkbox option */
         .options-container {
             margin-top: 20px;
             font-size: 0.9em;
@@ -111,7 +110,6 @@
 
         .options-container input {
             margin-right: 8px;
-            /* Simple cross-browser styling for the checkbox */
             width: 1.1em;
             height: 1.1em;
         }
@@ -189,22 +187,27 @@
         If you find this project useful, consider supporting its development!
       </p>
       <a href="https://ko-fi.com/LeapYeet" target="_blank" title="Support me on Ko-fi">
-        <img src="https://www.buymeacoe.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;">
+        <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;">
       </a>
     </footer>
 
     <script>
-        const flasherButton = document.getElementById('flasherButton');
-        const skipEraseCheckbox = document.getElementById('skipErase');
+        // This function waits until the <esp-web-install-button> element is fully defined and ready.
+        customElements.whenDefined('esp-web-install-button').then(() => {
+            const flasherButton = document.getElementById('flasherButton');
+            const skipEraseCheckbox = document.getElementById('skipErase');
 
-        // Set the initial state based on the checkbox (which is unchecked by default)
-        flasherButton.eraseFirst = !skipEraseCheckbox.checked;
-
-        // Listen for changes to the checkbox
-        skipEraseCheckbox.addEventListener('change', () => {
-            // When the box is checked, eraseFirst should be false.
-            // When it's unchecked, eraseFirst should be true.
+            // Set the initial state based on the checkbox (which is unchecked by default)
             flasherButton.eraseFirst = !skipEraseCheckbox.checked;
+            console.log(`Initial eraseFirst state: ${flasherButton.eraseFirst}`);
+
+            // Listen for changes to the checkbox
+            skipEraseCheckbox.addEventListener('change', () => {
+                // When the box is checked, eraseFirst should be false.
+                // When it's unchecked, eraseFirst should be true.
+                flasherButton.eraseFirst = !skipEraseCheckbox.checked;
+                console.log(`Checkbox changed. New eraseFirst state: ${flasherButton.eraseFirst}`);
+            });
         });
     </script>
 
