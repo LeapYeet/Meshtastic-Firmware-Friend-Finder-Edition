@@ -11,7 +11,7 @@
 <div align="center">
 
 ![License](https://img.shields.io/badge/License-GPL--2.0-blue.svg)
-![Version](https://img.shields.io/badge/Version-2.3.x--FF-brightgreen)
+![Version](https://img.shields.io/badge/Version-2.7.x--FF-brightgreen)
 ![Hardware](https://img.shields.io/badge/Tested_On-Heltec_V3-orange)
 ![Status](https://img.shields.io/badge/Status-Community_Beta-yellow)
 
