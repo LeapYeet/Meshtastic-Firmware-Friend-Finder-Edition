@@ -13,7 +13,7 @@
 ![License](https://img.shields.io/badge/License-GPL--2.0-blue.svg)
 ![Version](https://img.shields.io/badge/Version-2.7--FF-brightgreen)
 ![Hardware](https://img.shields.io/badge/Tested_On-Heltec_V3-orange)
-![Status](https://img.shields.io/badge/Status-Community_Beta-yellow)
+![Status](https://img.shields.io/badge/Status-Work_In_Progress-yellow)
 
 </div>
 
@@ -30,6 +30,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 - [Hardware Requirements](#️-hardware-requirements)
 - [Installation](#-installation)
 - [Getting Started: Setup & Usage](#-getting-started-setup--usage)
+- [Project Status & Future Goals](#-project-status--future-goals)
 - [Performance & Technical Notes](#-performance--technical-notes)
 - [License](#-license)
 
@@ -61,8 +62,8 @@ For the Friend Finder module to work, specific hardware is required. The firmwar
 | Component | Model / Specification | Notes |
 | :--- | :--- | :--- |
 | **Primary Device**| Heltec Wireless Tracker (V3) | Other ESP32-S3 devices may work but are untested. |
-| **GPS Module** | u-blox M8N (or similar) | **Required.** A satellite lock is mandatory. |
-| **Magnetometer** | QMC5883L | Required *only* for the direction arrow. |
+| **GPS Module** | Any Meshtastic-compatible GPS | **Required.** Any module supported by the base firmware will work. The u-blox M8N is recommended for its high accuracy. |
+| **Magnetometer** | QMC5883L | **Highly Recommended.** The directional arrow makes finding friends in crowded spaces much easier. Other magnetometers may work but are untested. |
 
 > **IMPORTANT: Magnetometer Wiring**
 > If you choose to install a magnetometer, it **must** be connected to the primary I²C bus. Other ports were tested without success.
@@ -108,6 +109,16 @@ The easiest way to install this firmware is by using the custom web flasher.
     * Navigate to `Friend Finder` -> `Track a Friend`.
     * Select your friend from the list to begin a mutual tracking session.
     * The device will switch to the tracking screen.
+
+---
+
+## 🚧 Project Status & Future Goals
+
+Please be aware that this entire project is a **work in progress**.
+
+-   **Source Code**: The source code will be made available soon for community review and contribution.
+-   **End Goal**: The ultimate goal is to refine this module and merge it with the official Meshtastic firmware repository so everyone can benefit from it.
+-   **Testing Needed**: Before an official merge is possible, extensive testing is required across different devices, hardware configurations, and LoRa settings. Community feedback and testing are highly encouraged!
 
 ---
 
