@@ -80,7 +80,7 @@ For the Friend Finder module to work, specific hardware is required. The firmwar
 
 The easiest way to install this firmware is by using the custom web flasher.
 
-### **➡️ [Install via Web Flasher](https://your-url-here.github.io/your-repo/)**
+### **➡️ [Install via Web Flasher](https://leapyeet.github.io/Meshtastic-Firmware-Friend-Finder-Edition/)**
 
 1.  Click the link above to open the web flasher.
 2.  Plug your Heltec V3 into your computer via USB.
