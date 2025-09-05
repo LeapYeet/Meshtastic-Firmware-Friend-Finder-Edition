@@ -62,7 +62,7 @@ For the Friend Finder module to work, specific hardware is required. The firmwar
 | :--- | :--- | :--- |
 | **Primary Device**| Heltec Wireless Tracker (V3) | Other ESP32-S3 devices may work but are untested. |
 | **GPS Module** | u-blox M8N (or similar) | **Required.** A satellite lock is mandatory. |
-| **Magnetometer** | QMC5883L | **Optional.** Required *only* for the direction arrow. |
+| **Magnetometer** | QMC5883L | Required *only* for the direction arrow. |
 
 > **IMPORTANT: Magnetometer Wiring**
 > If you choose to install a magnetometer, it **must** be connected to the primary I²C bus. Other ports were tested without success.
