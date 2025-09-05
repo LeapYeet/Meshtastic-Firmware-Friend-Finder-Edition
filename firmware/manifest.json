@@ -1,6 +1,6 @@
 {
   "name": "Meshtastic Custom Firmware",
-  "version": "2.3.x-custom",
+  "version": "2.7.7-custom",
   "builds": [
     {
       "chipFamily": "ESP32-S3",
@@ -12,3 +12,4 @@
     }
   ]
 }
+
