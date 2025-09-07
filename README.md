@@ -100,6 +100,8 @@ The easiest way to install this firmware is by using the custom web flasher.
     * On the device, navigate to the main menu.
     * Go to `Friend Finder` -> `Compass Cal`.
     * Run both the **Figure-8 Cal** and **Flat-Spin Cal** routines, following the on-screen instructions.
+    * **Flat-Spin Cal** requires you to rotate the device **CLOCKWISE** face-up on a table for 15 seconds
+    * **Figure-8 Cal** requires you to hold the device at arms length and wave the device in a figure-8 pattern. (Like flying a toy airplane)
 
 3.  **Pair with Friends**
     * From the main menu, go to `Friend Finder` -> `Start Pairing`.
@@ -116,7 +118,7 @@ The easiest way to install this firmware is by using the custom web flasher.
 
 Please be aware that this entire project is a **work in progress**.
 
--   **Source Code**: The source code will be made available soon for community review and contribution.
+-   **Source Code**: The source code is avalible [**HERE**](https://github.com/LeapYeet/firmware)
 -   **End Goal**: The ultimate goal is to refine this module and merge it with the official Meshtastic firmware repository so everyone can benefit from it.
 -   **Testing Needed**: Before an official merge is possible, extensive testing is required across different devices, hardware configurations, and LoRa settings. Community feedback and testing are highly encouraged!
 
@@ -126,10 +128,31 @@ Please be aware that this entire project is a **work in progress**.
 
 -   **LoRa Settings**: All testing has been conducted using the **LongFast** channel preset.
 -   **Update Interval**: To keep channel utilization low, position updates are sent every **20 seconds**. Faster LoRa settings may support more frequent updates, but this requires further community testing.
--   **Range**: The effective tracking range depends entirely on your device, antenna, LoRa settings, and the surrounding environment.
+-   **Range**: The effective tracking range depends entirely on your device, antenna, LoRa settings, and the surrounding environment. Hops may not be supported, this hasn't been tested.
 
 ---
 
+## 📝 Notes:
+
+1. 
+    * If the tracking compass is rotating the wrong way: You need to redo the flat-spin calibration **CLOCKWISE ->**
+    * When installing the magnetometer chip to the device, keep it away from other components and wires for better accuracy. Make sure it's firmly secured and flat.
+    * As said above, use ports SDA=41, SCL=42. If it doesn't work, try flipping the wires.
+    * A decent GPS module is recommended. All testing was done with u-blox m8n chips. My testing showed they were accurate to 1-3m when used outdoors.
+    * The Meshtastic Android app is fully usable with this custom firmware.
+    * If you want to stop a friend tracking you permanently, you will have to remove them as a friend on the "Track a friend" menu.
+    * I recommend a 3000mah battery when paried with a heltec v3 if you want it to last a full day.
+
+---
+
+## Final words:
+This project as been my main focus since Feburary 2025. I've had lots of fun developing it and I feel like it will be a great addition to the offical firmware when it's fully polished. It's really exciting to see how everyone will be using it. 
+
+I tested it at a large 1 day music festival in Milton Keynes in august and it worked great. Security didn't know what to think when getting in but saw no issue after showing them how it worked. I was able to walk into the crowd and later find my friends with no issues at all. I simply started a tracking session and the arrow pointed me to the group from 350 meters away.
+
+I love you all, have fun!
+
+
 ## 📜 License
 
-This project is a derivative work of the official Meshtastic firmware and is therefore licensed under the **GNU General Public License v2.0 (GPL-2.0)**. The original `LICENSE` file is included in the source code.
+This project is a derivative work of the official Meshtastic firmware and is therefore licensed under the **GNU General Public License v3.0 (GPL-2.0)**. The original `LICENSE` file is included in the source code.

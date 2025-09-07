@@ -106,10 +106,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 8px;
         }
 
         .options-container input {
-            margin-right: 8px;
+            margin-right: 6px;
             width: 1.1em;
             height: 1.1em;
         }
@@ -129,7 +130,6 @@
             color: #777;
             font-size: 0.9em;
         }
-
     </style>
 </head>
 <body>
@@ -142,13 +142,14 @@
         
         <div class="button-container">
             <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
-            
+
+            <!-- The installer component -->
             <esp-web-install-button id="flasherButton" manifest="firmware/manifest.json">
-                <button slot="activate">Connect & Install Firmware</button>
+                <button id="activateBtn" slot="activate">Connect & Install Firmware</button>
             </esp-web-install-button>
             
             <div class="options-container">
-                <input type="checkbox" id="skipErase" name="skipErase">
+                <input type="checkbox" id="skipErase" name="skipErase" />
                 <label for="skipErase">Skip full erase (preserves settings)</label>
             </div>
         </div>
@@ -167,10 +168,10 @@
             <h2>📋 Instructions</h2>
             <ol>
                 <li>Plug your <strong>Heltec V3</strong> into your computer.</li>
-                <li>(Optional) Check "Skip full erase" to keep your device settings. For a first-time or clean install, leave it unchecked.</li>
+                <li>(Optional) Check “Skip full erase” to keep your device settings. For a first-time or clean install, leave it unchecked.</li>
                 <li>Click the <strong>Connect & Install</strong> button above.</li>
-                <li>A pop-up will appear. Select the correct <strong>COM/Serial Port</strong> and click "Connect".</li>
-                <li>The installation will begin automatically. Keep this browser tab open until it's finished.</li>
+                <li>Select the correct <strong>COM/Serial Port</strong> and click “Connect”.</li>
+                <li>Keep this browser tab open until the installation completes.</li>
             </ol>
         </div>
         
@@ -192,22 +193,44 @@
     </footer>
 
     <script>
-        // This function waits until the <esp-web-install-button> element is fully defined and ready.
+        // Helper to sync both the property and the attribute that esp-web-tools understands
+        function applyEraseMode(buttonEl, skipErase) {
+            // skipErase=true  -> do NOT erase
+            // skipErase=false -> DO erase
+            const eraseFirst = !skipErase;
+
+            // Set property (supported per docs)
+            buttonEl.eraseFirst = eraseFirst;
+
+            // Mirror as attribute, because some versions/read-paths check the attribute
+            if (eraseFirst) {
+                buttonEl.setAttribute('erase-first', '');
+            } else {
+                buttonEl.removeAttribute('erase-first');
+            }
+
+            console.log(`[FF Flasher] eraseFirst=${eraseFirst} (skipErase=${skipErase})`);
+        }
+
+        // Wait until the custom element is defined
         customElements.whenDefined('esp-web-install-button').then(() => {
-            const flasherButton = document.getElementById('flasherButton');
+            const flasherButton   = document.getElementById('flasherButton');
             const skipEraseCheckbox = document.getElementById('skipErase');
+            const activateBtn     = document.getElementById('activateBtn');
 
-            // Set the initial state based on the checkbox (which is unchecked by default)
-            flasherButton.eraseFirst = !skipEraseCheckbox.checked;
-            console.log(`Initial eraseFirst state: ${flasherButton.eraseFirst}`);
+            // Initial state (unchecked => erase first)
+            applyEraseMode(flasherButton, skipEraseCheckbox.checked);
 
-            // Listen for changes to the checkbox
+            // Keep in sync while user toggles the checkbox
             skipEraseCheckbox.addEventListener('change', () => {
-                // When the box is checked, eraseFirst should be false.
-                // When it's unchecked, eraseFirst should be true.
-                flasherButton.eraseFirst = !skipEraseCheckbox.checked;
-                console.log(`Checkbox changed. New eraseFirst state: ${flasherButton.eraseFirst}`);
+                applyEraseMode(flasherButton, skipEraseCheckbox.checked);
             });
+
+            // Make absolutely sure state is correct right before opening the dialog
+            activateBtn.addEventListener('click', () => {
+                applyEraseMode(flasherButton, skipEraseCheckbox.checked);
+                // Let the <esp-web-install-button> handle the rest (it owns the slot)
+            }, { capture: true });
         });
     </script>
 
