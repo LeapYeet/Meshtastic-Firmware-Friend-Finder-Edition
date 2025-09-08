@@ -30,6 +30,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 - [Hardware Requirements](#️-hardware-requirements)
 - [Installation](#-installation)
 - [Getting Started: Setup & Usage](#-getting-started-setup--usage)
+- [A Guide to Magnetometer Calibration](#-a-guide-to-magnetometer-calibration)
 - [Project Status & Future Goals](#-project-status--future-goals)
 - [Performance & Technical Notes](#-performance--technical-notes)
 - [License](#-license)
@@ -96,12 +97,7 @@ The easiest way to install this firmware is by using the custom web flasher.
     * Before starting, make sure your GPS module is connected and has acquired a solid satellite lock.
 
 2.  **Calibrate the Magnetometer (If Installed)**
-    * This step is only necessary if you have a magnetometer.
-    * On the device, navigate to the main menu.
-    * Go to `Friend Finder` -> `Compass Cal`.
-    * Run both the **Figure-8 Cal** and **Flat-Spin Cal** routines, following the on-screen instructions.
-    * **Flat-Spin Cal** requires you to rotate the device **CLOCKWISE** face-up on a table for 15 seconds
-    * **Figure-8 Cal** requires you to hold the device at arms length and wave the device in a figure-8 pattern. (Like flying a toy airplane)
+    * A proper compass calibration is **essential** for the directional arrow to be accurate. Please follow the detailed instructions in the calibration guide below.
 
 3.  **Pair with Friends**
     * From the main menu, go to `Friend Finder` -> `Start Pairing`.
@@ -111,6 +107,49 @@ The easiest way to install this firmware is by using the custom web flasher.
     * Navigate to `Friend Finder` -> `Track a Friend`.
     * Select your friend from the list to begin a mutual tracking session.
     * The device will switch to the tracking screen.
+
+---
+## 🧭 A Guide to Magnetometer Calibration
+
+### Why is Calibration Important?
+Your magnetometer (compass) is sensitive to magnetic fields. This includes not only the Earth's magnetic field but also interference from nearby electronics, batteries, and metal objects. Calibration is crucial to teach the sensor how to distinguish between the Earth's magnetic north and this local interference, ensuring the directional arrow is accurate.
+
+### When to Calibrate
+You should perform a full two-step calibration:
+-   **Upon first installation** of the magnetometer.
+-   If you add or move components inside your device's case.
+-   If the directional arrow seems consistently inaccurate or erratic.
+
+### The Two-Step Calibration Process
+For the best results, perform these calibrations outdoors, away from large metal objects like cars, buildings, or metal benches.
+
+#### **1. Figure-8 Calibration (Hard & Soft Iron)**
+This is the most important step. It corrects for magnetic fields originating from the device itself (like the battery, speaker, or wires).
+
+1.  On the device, navigate to `Friend Finder` -> `Compass Cal`.
+2.  Select **Figure-8 Cal** from the menu.
+3.  Hold the device out in front of you.
+4.  For 15 seconds, slowly move the device in a large figure-8 pattern. As you move it, twist and rotate your wrist to ensure the device points in every possible direction (up, down, left, right, forwards, backward, etc.). Imagine you are a flying a toy airplane through loops and rolls.
+5.  The screen will return to the compass view when complete.
+
+#### **2. Flat-Spin Calibration (2D Alignment)**
+This routine fine-tunes the compass for when it's held relatively flat, which is a common use case.
+
+1.  On the device, navigate to `Friend Finder` -> `Compass Cal`.
+2.  Select **Flat-Spin Cal** from the menu.
+3.  Place the device face-up on a flat, **non-metallic** surface (a wooden table or the ground works well).
+4.  For 12 seconds, smoothly rotate the device **CLOCKWISE**. Try for at least 2-3 full rotations.
+5.  The screen will return to the compass view when complete.
+
+### Additional Compass Tools
+The calibration menu has a few other useful tools:
+-   **Set North Here**: If you have a real compass and know which way is true north, point the top of the device in that direction and select this option. It will apply an offset so the device's 0° heading aligns with true north.
+-   **Clear North Offset**: Removes any manual offset created by "Set North Here".
+-   **Flip North**: This flips the compass heading by 180°. Use this if your magnetometer was accidentally installed backward and the arrow points directly away from your friend.
+
+### Troubleshooting Tips
+-   **Arrow points the wrong way:** If the arrow consistently points in the wrong direction (e.g., behind you), first try the **Flip North** option. If it's still off, you likely spun the device **counter-clockwise** during the Flat-Spin calibration. Redo the flat-spin, ensuring you rotate smoothly clockwise.
+-   **Arrow is erratic or "jumpy":** This usually indicates strong local magnetic interference. Make sure the magnetometer is mounted away from wires (especially the battery lead) and other metal components. You should also redo the **Figure-8 calibration** away from any potential sources of interference.
 
 ---
 
