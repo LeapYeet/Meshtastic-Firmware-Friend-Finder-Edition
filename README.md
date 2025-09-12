@@ -157,7 +157,8 @@ The calibration menu has a few other useful tools:
 
 Please be aware that this entire project is a **work in progress**.
 
--   **Source Code**: The source code is avalible [**HERE**](https://github.com/LeapYeet/firmware)
+-   **Source Code**: The source code is avalible [**HERE**](https://github.com/LeapYeet/firmware). 
+The module files are at src -> modules -> FriendFinderModule.cpp.
 -   **End Goal**: The ultimate goal is to refine this module and merge it with the official Meshtastic firmware repository so everyone can benefit from it.
 -   **Testing Needed**: Before an official merge is possible, extensive testing is required across different devices, hardware configurations, and LoRa settings. Community feedback and testing are highly encouraged!
 

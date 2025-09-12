@@ -114,6 +114,28 @@
             width: 1.1em;
             height: 1.1em;
         }
+        
+        .options-container input:disabled + label {
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .backup-notice {
+            background-color: #fffbe6;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 25px 0 0 0;
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+
+        .backup-notice p {
+            margin: 0;
+        }
+
+        .backup-notice p:first-child {
+            margin-bottom: 8px;
+        }
 
         a {
             color: var(--primary-color);
@@ -143,14 +165,18 @@
         <div class="button-container">
             <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
 
-            <!-- The installer component -->
             <esp-web-install-button id="flasherButton" manifest="firmware/manifest.json">
                 <button id="activateBtn" slot="activate">Connect & Install Firmware</button>
             </esp-web-install-button>
             
             <div class="options-container">
-                <input type="checkbox" id="skipErase" name="skipErase" />
-                <label for="skipErase">Skip full erase (preserves settings)</label>
+                <input type="checkbox" id="skipErase" name="skipErase" disabled />
+                <label for="skipErase">Skip full erase (coming soon)</label>
+            </div>
+            
+            <div class="backup-notice">
+                <p><strong>Important:</strong> The "skip erase" feature will be added soon. For now, flashing the firmware will perform a **full erase** of the device.</p>
+                <p>Please back up your settings and channel keys using the Meshtastic app or CLI before you proceed.</p>
             </div>
         </div>
 
@@ -168,10 +194,9 @@
             <h2>📋 Instructions</h2>
             <ol>
                 <li>Plug your <strong>Heltec V3</strong> into your computer.</li>
-                <li>(Optional) Check “Skip full erase” to keep your device settings. For a first-time or clean install, leave it unchecked.</li>
                 <li>Click the <strong>Connect & Install</strong> button above.</li>
-                <li>Select the correct <strong>COM/Serial Port</strong> and click “Connect”.</li>
-                <li>Keep this browser tab open until the installation completes.</li>
+                <li>Select the correct <strong>COM/Serial Port</strong> from the pop-up window and click “Connect”.</li>
+                <li>The installation will begin. Keep this browser tab open until it completes.</li>
             </ol>
         </div>
         
