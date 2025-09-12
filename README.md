@@ -2,8 +2,6 @@
 
 # Meshtastic Firmware: Friend Finder Edition
 
-
-
 **An enhanced version of Meshtastic with real-time, compass-based friend tracking.**
 
 </div>
@@ -27,6 +25,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 
 - [Core Features](#-core-features)
 - [UI Showcase](#-ui-showcase)
+- [Understanding the Tracking Screen](#-understanding-the-tracking-screen)
 - [Hardware Requirements](#️-hardware-requirements)
 - [Installation](#-installation)
 - [Getting Started: Setup & Usage](#-getting-started-setup--usage)
@@ -51,8 +50,38 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 
 | Main Menu | Tracking (with Magnetometer) | Tracking (without Magnetometer) | Calibration Menu |
 | :---: | :---: | :---: | :---: |
-| <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/home_menu.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/tracking_with_mag.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/tracking_no_mag.jpg" width="200"> | <img src="https://raw.githubusercontent.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/main/cal_menu.jpg" width="200"> |
+| <img src="img/home_menu.jpg" width="200"> | <img src="img/tracking_with_mag.jpg" width="200"> | <img src="img/tracking_no_mag.jpg" width="200"> | <img src="img/cal_menu.jpg" width="200"> |
 | *Friend Finder on the main menu.* | *Arrow points to your friend.* | *Only the distance is displayed.* | *Easy access to compass calibration.* |
+
+---
+
+## 📊 Understanding the Tracking Screen
+
+The tracking screen provides live information about your friend's status and location.
+
+### With a Magnetometer
+
+When a calibrated magnetometer is installed, the screen displays a large directional arrow.
+
+<div align="center">
+<img src="img/tracking_with_mag_info.jpg" width="600">
+</div>
+
+| Element | Description |
+| :--- | :--- |
+| **Who you are tracking** | Displays the short name of the friend you are currently in a session with. |
+| **Direction to friend** | A large arrow that points in the real-world direction of your friend. |
+| **Distance to friend** | The live distance between you and your friend. |
+| **Friend's battery** | Your friend's current battery level percentage. |
+| **Time since update** | Shows how long ago the last position packet was received from your friend. |
+
+### Without a Magnetometer
+
+If you don't have a magnetometer, the screen will only show the distance to your friend, as there is no directional data.
+
+<div align="center">
+<img src="img/tracking_no_mag_info.jpg" width="600">
+</div>
 
 ---
 
