@@ -59,11 +59,18 @@
         }
 
         h2 {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 600;
             border-left: 4px solid var(--primary-color);
             padding-left: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 10px;
         }
 
         ul, ol {
@@ -71,7 +78,7 @@
         }
 
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .button-container {
@@ -79,7 +86,6 @@
             margin: 40px 0;
         }
 
-        /* Styling the ESP Web Tools button */
         esp-web-install-button button {
             background-color: var(--primary-color);
             color: white;
@@ -109,18 +115,12 @@
             gap: 8px;
         }
 
-        .options-container input {
-            margin-right: 6px;
-            width: 1.1em;
-            height: 1.1em;
-        }
-        
         .options-container input:disabled + label {
             color: #aaa;
             cursor: not-allowed;
         }
 
-        .backup-notice {
+        .backup-notice, .warning-box {
             background-color: #fffbe6;
             border-left: 4px solid #ffc107;
             padding: 15px 20px;
@@ -128,13 +128,61 @@
             border-radius: 8px;
             font-size: 0.95em;
         }
+        
+        .warning-box {
+            background-color: #fff1f0;
+            border-left-color: #d9363e;
+        }
 
-        .backup-notice p {
+        .backup-notice p, .warning-box p {
             margin: 0;
         }
 
         .backup-notice p:first-child {
             margin-bottom: 8px;
+        }
+
+        .ui-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .ui-showcase img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .ui-showcase p {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+        
+        code {
+            background-color: #eef;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
         }
 
         a {
@@ -179,37 +227,99 @@
                 <p>Please back up your settings and channel keys using the Meshtastic app or CLI before you proceed.</p>
             </div>
         </div>
-
+        
         <div class="section">
-            <h2>🚀 Key Features</h2>
-            <ul>
-                <li><strong>Real-Time Tracking:</strong> See the distance and direction to your friends.</li>
-                <li><strong>Compass Support:</strong> Adds magnetometer support for a directional arrow.</li>
-                <li><strong>Designed for the Outdoors:</strong> Perfect for festivals, skiing, and hiking.</li>
-            </ul>
+            <h2>✨ UI Showcase</h2>
+            <div class="ui-showcase">
+                <div>
+                    <img src="img/tracking_with_mag_info.jpg" alt="Tracking screen with magnetometer">
+                    <p>Tracking with a magnetometer</p>
+                </div>
+                <div>
+                    <img src="img/tracking_no_mag_info.jpg" alt="Tracking screen without magnetometer">
+                    <p>Tracking without a magnetometer</p>
+                </div>
+            </div>
         </div>
 
         <div class="section">
-            <h2>📋 Instructions</h2>
+            <h2>⚙️ Hardware Requirements</h2>
+            <p>This firmware requires a **Heltec V3** and a GPS module. For the directional arrow, a magnetometer is highly recommended.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Model / Specification</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primary Device</strong></td>
+                        <td>Heltec Wireless Tracker (V3)</td>
+                        <td>Other ESP32-S3 devices are untested.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GPS Module</strong></td>
+                        <td>Any Meshtastic-compatible GPS</td>
+                        <td><strong>Required.</strong> The u-blox M8N is recommended.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Magnetometer</strong></td>
+                        <td>QMC5883L</td>
+                        <td><strong>Highly Recommended</strong> for the directional arrow. Must be wired to the primary I²C bus (SDA: 41, SCL: 42).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>📋 Instructions & Calibration Guide</h2>
+            
+            <h3>1. Installation</h3>
             <ol>
                 <li>Plug your <strong>Heltec V3</strong> into your computer.</li>
-                <li>Click the <strong>Connect & Install</strong> button above.</li>
+                <li>Click the <strong>Connect & Install</strong> button at the top of the page.</li>
                 <li>Select the correct <strong>COM/Serial Port</strong> from the pop-up window and click “Connect”.</li>
                 <li>The installation will begin. Keep this browser tab open until it completes.</li>
+            </ol>
+
+            <h3>2. Magnetometer Calibration (Essential!)</h3>
+            <p>A proper compass calibration is **crucial** for the directional arrow to be accurate. Perform these steps outdoors, away from large metal objects.</p>
+            
+            <h4>Step A: Figure-8 Calibration</h4>
+            <ol>
+                <li>On the device, navigate to `Friend Finder` -> `Compass Cal` -> `Figure-8 Cal`.</li>
+                <li>For 15 seconds, slowly move the device in a large figure-8 pattern, twisting and rotating your wrist to point the device in every possible direction.</li>
+            </ol>
+            
+            <h4>Step B: Flat-Spin Calibration</h4>
+            <ol>
+                <li>Go to `Friend Finder` -> `Compass Cal` -> `Flat-Spin Cal`.</li>
+                <li>Place the device on a flat, non-metallic surface.</li>
+                <li>For 12 seconds, smoothly rotate the device **CLOCKWISE** for at least 2-3 full rotations.</li>
+            </ol>
+            
+            <h3>3. Usage</h3>
+             <ol>
+                <li>Ensure your GPS has a satellite lock.</li>
+                <li>Pair with a friend via `Friend Finder` -> `Start Pairing`.</li>
+                <li>Start a session from `Friend Finder` -> `Track a Friend`.</li>
             </ol>
         </div>
         
         <div class="section">
-            <h2>⚙️ Requirements & Source Code</h2>
-            <p>
-                This firmware requires a <strong>Heltec V3</strong> with a <strong>GPS module</strong>. For the directional arrow, a <strong>QMC5883L magnetometer</strong> is highly recommended. For more details, visit the <a href="https://github.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition" target="_blank">web flasher repository</a> or view the <a href="https://github.com/LeapYeet/firmware" target="_blank">Friend finder firmware fork</a>.
-            </p>
+            <h2>🤔 Troubleshooting Tips</h2>
+            <ul>
+                <li><strong>Arrow points the wrong way:</strong> It's likely pointing 180° away from your friend. Use the `Flip North` option in the `Compass Cal` menu. If it's still wrong, you probably spun the device counter-clockwise during the Flat-Spin calibration. Redo it carefully in the **clockwise** direction.</li>
+                <li><strong>Arrow is erratic or "jumpy":</strong> This indicates magnetic interference. Ensure the magnetometer is mounted away from wires (especially battery leads). Redo the **Figure-8 calibration** away from any metal.</li>
+            </ul>
         </div>
 
-        <div class="section">
-            <h2>Warning</h2>
+        <div class="section warning-box">
+            <h2>⚠️ Warning</h2>
             <p>
-                Flashing firmware can potentially brick your device. Ensure you have the correct firmware for your specific model and follow all instructions carefully. This firmware is experimental and may have bugs. Use at your own risk.
+                Flashing firmware can potentially brick your device. Ensure you have the correct firmware for your specific model and follow all instructions carefully. This firmware is experimental and may have bugs. Use at your own risk. For source code and more, visit the <a href="https://github.com/LeapYeet/firmware" target="_blank">firmware fork</a>.
             </p>
         </div>
     </main>
@@ -224,43 +334,27 @@
     </footer>
 
     <script>
-        // Helper to sync both the property and the attribute that esp-web-tools understands
         function applyEraseMode(buttonEl, skipErase) {
-            // skipErase=true  -> do NOT erase
-            // skipErase=false -> DO erase
             const eraseFirst = !skipErase;
-
-            // Set property (supported per docs)
             buttonEl.eraseFirst = eraseFirst;
-
-            // Mirror as attribute, because some versions/read-paths check the attribute
             if (eraseFirst) {
                 buttonEl.setAttribute('erase-first', '');
             } else {
                 buttonEl.removeAttribute('erase-first');
             }
-
             console.log(`[FF Flasher] eraseFirst=${eraseFirst} (skipErase=${skipErase})`);
         }
 
-        // Wait until the custom element is defined
         customElements.whenDefined('esp-web-install-button').then(() => {
             const flasherButton   = document.getElementById('flasherButton');
             const skipEraseCheckbox = document.getElementById('skipErase');
             const activateBtn     = document.getElementById('activateBtn');
-
-            // Initial state (unchecked => erase first)
             applyEraseMode(flasherButton, skipEraseCheckbox.checked);
-
-            // Keep in sync while user toggles the checkbox
             skipEraseCheckbox.addEventListener('change', () => {
                 applyEraseMode(flasherButton, skipEraseCheckbox.checked);
             });
-
-            // Make absolutely sure state is correct right before opening the dialog
             activateBtn.addEventListener('click', () => {
                 applyEraseMode(flasherButton, skipEraseCheckbox.checked);
-                // Let the <esp-web-install-button> handle the rest (it owns the slot)
             }, { capture: true });
         });
     </script>
