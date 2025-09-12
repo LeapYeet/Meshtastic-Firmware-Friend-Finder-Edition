@@ -97,12 +97,12 @@ For the Friend Finder module to work, specific hardware is required. The firmwar
 
 > **IMPORTANT: Magnetometer Wiring**
 > If you choose to install a magnetometer, it **must** be connected to the primary I²C bus. Other ports were tested without success.
-> ```text
+
 | Magnetometer | Pin | Heltec V3 | Pin |
 | :--- | :---: | :--- | ---: |
 | **SDA** | -> | **GPIO 41** | |
 | **SCL** | -> | **GPIO 42** | |
-> ```
+
 
 ---
 
