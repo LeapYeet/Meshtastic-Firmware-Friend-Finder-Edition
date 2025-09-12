@@ -1,0 +1,15 @@
+{
+  "name": "Meshtastic - Friend Finder (T-Lora T3-S3)",
+  "version": "2.7-FF",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "bootloader.bin", "offset": 0 },
+        { "path": "partitions.bin", "offset": 32768 },
+        { "path": "firmware.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}

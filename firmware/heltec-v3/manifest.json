@@ -1,0 +1,15 @@
+{
+  "name": "Meshtastic Friend Finder",
+  "version": "Heltec-v3",
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "bootloader.bin", "offset": 0 },
+        { "path": "partitions.bin", "offset": 32768 },
+        { "path": "firmware.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}
+
