@@ -78,8 +78,32 @@
             text-align: center;
             margin: 40px 0;
         }
+        
+        /* New styles for the device selection dropdown */
+        .select-container {
+            margin-bottom: 25px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-        /* Styling the ESP Web Tools button */
+        .select-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            text-align: center;
+        }
+
+        .select-container select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 16px;
+            background-color: #fafafa;
+        }
+
         esp-web-install-button button {
             background-color: var(--primary-color);
             color: white;
@@ -159,14 +183,19 @@
     <main>
         <h1>Friend Finder Firmware Flasher</h1>
         <p class="intro">
-            Install the custom Meshtastic firmware with Friend Finder & Magnetometer support directly to your Heltec V3.
+            Install the custom Meshtastic firmware with Friend Finder & Magnetometer support directly to your device.
         </p>
         
         <div class="button-container">
+            <div class="select-container">
+                <label for="device-select">1. Select Your Device</label>
+                <select id="device-select"></select>
+            </div>
+
             <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
 
-            <esp-web-install-button id="flasherButton" manifest="firmware/manifest.json">
-                <button id="activateBtn" slot="activate">Connect & Install Firmware</button>
+            <esp-web-install-button id="flasherButton">
+                <button id="activateBtn" slot="activate">2. Connect & Install Firmware</button>
             </esp-web-install-button>
             
             <div class="options-container">
@@ -175,7 +204,7 @@
             </div>
             
             <div class="backup-notice">
-                <p><strong>Important:</strong> The "skip erase" feature will be added soon. For now, flashing the firmware will perform a **full erase** of the device.</p>
+                <p><strong>Important:</strong> The "skip erase" feature will be added soon. For now, flashing the firmware will perform a <strong>full erase</strong> of the device.</p>
                 <p>Please back up your settings and channel keys using the Meshtastic app or CLI before you proceed.</p>
             </div>
         </div>
@@ -193,8 +222,9 @@
         <div class="section">
             <h2>📋 Instructions</h2>
             <ol>
-                <li>Plug your <strong>Heltec V3</strong> into your computer.</li>
-                <li>Click the <strong>Connect & Install</strong> button above.</li>
+                <li>Select your device from the dropdown menu above.</li>
+                <li>Plug your device into your computer.</li>
+                <li>Click the <strong>Connect & Install</strong> button.</li>
                 <li>Select the correct <strong>COM/Serial Port</strong> from the pop-up window and click “Connect”.</li>
                 <li>The installation will begin. Keep this browser tab open until it completes.</li>
             </ol>
@@ -203,7 +233,7 @@
         <div class="section">
             <h2>⚙️ Hardware Requirements</h2>
             <p>
-                This firmware is designed for the <strong>Heltec V3</strong> and requires a <strong>GPS module</strong> to function. For the directional arrow feature, a <strong>QMC5883L magnetometer</strong> is also needed.
+                This firmware is designed for ESP32-S3 devices like the <strong>Heltec V3</strong> or <strong>LILYGO T-Lora T3-S3</strong> and requires a <strong>GPS module</strong> to function. For the directional arrow feature, a <strong>QMC5883L magnetometer</strong> is also needed.
             </p>
             <p>
                 Please <a href="https://github.com/LeapYeet/Meshtastic-Firmware-Friend-Finder-Edition/blob/main/README.md" target="_blank"><strong>read the project's README file carefully</strong></a> for important details on wiring the components and performing the essential compass calibration to ensure accuracy.
@@ -241,41 +271,61 @@
     <script>
         // Helper to sync both the property and the attribute that esp-web-tools understands
         function applyEraseMode(buttonEl, skipErase) {
-            // skipErase=true  -> do NOT erase
-            // skipErase=false -> DO erase
             const eraseFirst = !skipErase;
-
-            // Set property (supported per docs)
             buttonEl.eraseFirst = eraseFirst;
-
-            // Mirror as attribute, because some versions/read-paths check the attribute
             if (eraseFirst) {
                 buttonEl.setAttribute('erase-first', '');
             } else {
                 buttonEl.removeAttribute('erase-first');
             }
-
             console.log(`[FF Flasher] eraseFirst=${eraseFirst} (skipErase=${skipErase})`);
         }
 
         // Wait until the custom element is defined
         customElements.whenDefined('esp-web-install-button').then(() => {
-            const flasherButton   = document.getElementById('flasherButton');
+            const flasherButton     = document.getElementById('flasherButton');
+            const deviceSelect      = document.getElementById('device-select');
             const skipEraseCheckbox = document.getElementById('skipErase');
-            const activateBtn     = document.getElementById('activateBtn');
+            const activateBtn       = document.getElementById('activateBtn');
 
-            // Initial state (unchecked => erase first)
+            // --- Define your supported devices here ---
+            const devices = [
+                {
+                    name: "Heltec V3",
+                    manifest: "firmware/heltec_v3/manifest.json"
+                },
+                {
+                    name: "LILYGO T-Lora T3-S3",
+                    manifest: "firmware/tlora_t3s3_v1/manifest.json"
+                }
+      
+            ];
+
+            // --- Logic to populate and manage the device dropdown ---
+            devices.forEach(device => {
+                const option = document.createElement('option');
+                option.value = device.manifest;
+                option.textContent = device.name;
+                deviceSelect.appendChild(option);
+            });
+
+            // Set the initial manifest path for the flasher when the page loads
+            if (devices.length > 0) {
+                flasherButton.manifest = devices[0].manifest;
+            }
+
+            // Update the manifest path whenever the user selects a different device
+            deviceSelect.addEventListener('change', (event) => {
+                flasherButton.manifest = event.target.value;
+            });
+
+            // Logic for the erase checkbox
             applyEraseMode(flasherButton, skipEraseCheckbox.checked);
-
-            // Keep in sync while user toggles the checkbox
             skipEraseCheckbox.addEventListener('change', () => {
                 applyEraseMode(flasherButton, skipEraseCheckbox.checked);
             });
-
-            // Make absolutely sure state is correct right before opening the dialog
             activateBtn.addEventListener('click', () => {
                 applyEraseMode(flasherButton, skipEraseCheckbox.checked);
-                // Let the <esp-web-install-button> handle the rest (it owns the slot)
             }, { capture: true });
         });
     </script>
