@@ -21,14 +21,26 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 
 ---
 
+## 🚀 Quick Install & Get Started
+
+The easiest way to get started is by using the custom web flasher. It handles everything for you.
+
+### **➡️ [Install via Web Flasher](https://leapyeet.github.io/Meshtastic-Firmware-Friend-Finder-Edition/)**
+
+Once installed, here's how to get up and running:
+1.  **Calibrate the Compass:** A proper calibration is **essential** for the arrow to be accurate. Follow the detailed [**Calibration Guide**](#-a-guide-to-magnetometer-calibration) below.
+2.  **Pair with Friends:** Go to `Friend Finder -> Start Pairing` on your device and have your friend do the same.
+3.  **Start Tracking:** Navigate to `Friend Finder -> Track a Friend` and select them from the list.
+
+---
+
 ## 📖 Table of Contents
 
 - [Core Features](#-core-features)
 - [UI Showcase](#-ui-showcase)
 - [Understanding the Tracking Screen](#-understanding-the-tracking-screen)
 - [Hardware Requirements](#️-hardware-requirements)
-- [Installation](#-installation)
-- [Getting Started: Setup & Usage](#-getting-started-setup--usage)
+- [Detailed Usage Guide](#-detailed-usage-guide)
 - [Advanced Features & Tools](#-advanced-features--tools)
 - [A Guide to Magnetometer Calibration](#-a-guide-to-magnetometer-calibration)
 - [Project Status & Future Goals](#-project-status--future-goals)
@@ -66,6 +78,7 @@ The tracking screen provides live information about your friend's status and loc
 When a calibrated magnetometer is installed, the screen displays a large directional arrow.
 
 <div align="center">
+
 <img src="img/tracking_with_mag_info.jpg" width="600">
 </div>
 
@@ -82,6 +95,7 @@ When a calibrated magnetometer is installed, the screen displays a large directi
 If you don't have a magnetometer, the screen will only show the distance to your friend, as there is no directional data.
 
 <div align="center">
+
 <img src="img/tracking_no_mag_info.jpg" width="600">
 </div>
 
@@ -124,21 +138,7 @@ To find the correct I²C pins for an unsupported ESP32-S3 board, you must look i
 
 ---
 
-## 💾 Installation
-
-The easiest way to install this firmware is by using the custom web flasher.
-
-### **➡️ [Install via Web Flasher](https://leapyeet.github.io/Meshtastic-Firmware-Friend-Finder-Edition/)**
-
-1.  Click the link above to open the web flasher.
-2.  Plug your device into your computer via USB.
-3.  Click the **Connect & Install** button.
-4.  A pop-up window will appear. Select the correct COM port for your device and click "Connect".
-5.  The installation will begin automatically. Do not unplug the device until it is complete.
-
----
-
-## 🚀 Getting Started: Setup & Usage
+## 📖 Detailed Usage Guide
 
 1.  **Ensure GPS is Active**
     * Before starting, make sure your GPS module is connected and has acquired a solid satellite lock.
