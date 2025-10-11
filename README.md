@@ -10,7 +10,7 @@
 
 ![License](https://img.shields.io/badge/License-GPL--2.0-blue.svg)
 ![Version](https://img.shields.io/badge/Version-2.7--FF-brightgreen)
-![Hardware](https://img.shields.io/badge/Tested_On-Heltec_V3-orange)
+![Hardware](https://img.shields.io/badge/Tested_On-Heltec_V3,_T--LoRa_T3--S3-orange)
 ![Status](https://img.shields.io/badge/Status-Work_In_Progress-yellow)
 
 </div>
@@ -29,6 +29,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 - [Hardware Requirements](#️-hardware-requirements)
 - [Installation](#-installation)
 - [Getting Started: Setup & Usage](#-getting-started-setup--usage)
+- [Advanced Features & Tools](#-advanced-features--tools)
 - [A Guide to Magnetometer Calibration](#-a-guide-to-magnetometer-calibration)
 - [Project Status & Future Goals](#-project-status--future-goals)
 - [Performance & Technical Notes](#-performance--technical-notes)
@@ -40,6 +41,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 
 -   🛰️ **Friend Finder Module**: A new interface to securely pair with other devices and initiate a tracking session.
 -   🧭 **Real-Time Tracking Screen**: Shows the live distance to your friend. With a magnetometer, it also displays a large arrow pointing in their direction.
+-   📍 **Saved Places**: Save your current GPS location (like your car or campsite) and get a directional arrow to guide you back to it later.
 -   🗺️ **Friend Map**: View the locations of all your paired friends simultaneously on a simple map display.
 -   ⚙️ **Optional Magnetometer Support**: Includes all necessary drivers and logic to use a QMC5883L magnetometer for directional tracking.
 -   🏞️ **Designed for the Outdoors**: Perfect for staying connected at festivals, while skiing, hiking, or at any large-scale event.
@@ -87,22 +89,38 @@ If you don't have a magnetometer, the screen will only show the distance to your
 
 ## ⚙️ Hardware Requirements
 
-For the Friend Finder module to work, specific hardware is required. The firmware was built and tested on the following setup:
+For the Friend Finder module to work, specific hardware is required.
 
 | Component | Model / Specification | Notes |
 | :--- | :--- | :--- |
-| **Primary Device**| Heltec Wireless Tracker (V3) | Other ESP32-S3 devices may work but are untested. |
+| **Primary Device**| Heltec Wireless Tracker (V3), LilyGo T-LoRa T3-S3 V1 | Other ESP32-S3 devices may work but require individual testing. |
 | **GPS Module** | Any Meshtastic-compatible GPS | **Required.** Any module supported by the base firmware will work. The u-blox M8N is recommended for its high accuracy. |
 | **Magnetometer** | QMC5883L | **Highly Recommended.** The directional arrow makes finding friends in crowded spaces much easier. Other magnetometers may work but are untested. |
 
 > **IMPORTANT: Magnetometer Wiring**
-> If you choose to install a magnetometer, it **must** be connected to the primary I²C bus. Other ports were tested without success.
+> The correct I²C pins vary by device. Here are the confirmed wiring configurations. The firmware is designed to use the **secondary I²C bus** (`I2C1`) where available.
 
+#### Heltec Wireless Tracker (V3)
 | Magnetometer | Pin | Heltec V3 | Pin |
 | :--- | :---: | :--- | ---: |
 | **SDA** | -> | **GPIO 41** | |
 | **SCL** | -> | **GPIO 42** | |
 
+#### LilyGo T-LoRa T3-S3 V1
+| Magnetometer | Pin | T-LoRa S3 | Pin |
+| :--- | :---: | :--- | ---: |
+| **SDA** | -> | **GPIO 43** | |
+| **SCL** | -> | **GPIO 44** | |
+
+#### Finding Pins on Other Devices
+To find the correct I²C pins for an unsupported ESP32-S3 board, you must look in the firmware source code for the board's variant file.
+1.  Navigate to the variants directory in the source code. The path will be similar to `firmware/src/variants/esp32s3/your_board_name/`.
+2.  Open the `variant.h` file.
+3.  Search for the following definitions to find the correct GPIO pin numbers for the secondary I²C bus:
+    ```cpp
+    #define I2C_SDA1 SDA
+    #define I2C_SCL1 SCL
+    ```
 
 ---
 
@@ -113,7 +131,7 @@ The easiest way to install this firmware is by using the custom web flasher.
 ### **➡️ [Install via Web Flasher](https://leapyeet.github.io/Meshtastic-Firmware-Friend-Finder-Edition/)**
 
 1.  Click the link above to open the web flasher.
-2.  Plug your Heltec V3 into your computer via USB.
+2.  Plug your device into your computer via USB.
 3.  Click the **Connect & Install** button.
 4.  A pop-up window will appear. Select the correct COM port for your device and click "Connect".
 5.  The installation will begin automatically. Do not unplug the device until it is complete.
@@ -136,6 +154,38 @@ The easiest way to install this firmware is by using the custom web flasher.
     * Navigate to `Friend Finder` -> `Track a Friend`.
     * Select your friend from the list to begin a mutual tracking session.
     * The device will switch to the tracking screen.
+
+---
+## 🛠️ Advanced Features & Tools
+
+### 📍 Using Saved Places
+This feature lets you save your current location to one of four available slots. You can then start a tracking session to get a directional arrow that guides you back to that spot—perfect for finding your car, tent, or campsite.
+
+**To Save a Location:**
+1.  Stand at the physical location you wish to save. A GPS lock is required.
+2.  Navigate to `Friend Finder` -> `Saved Places`.
+3.  Select **"Save Current Location"**.
+4.  The device will save your coordinates to the first available empty slot (e.g., "Place 1").
+
+**To Track a Saved Location:**
+1.  Navigate to `Friend Finder` -> `Saved Places`.
+2.  Select the place you want to track from the list (e.g., "Place 1").
+3.  From the action menu, choose **"Track"**.
+4.  The tracking screen will appear and guide you to your saved location.
+
+### 🔬 Developer Tools
+This menu contains diagnostic tools for testing and debugging. More tools may be added in the future.
+
+**Spoof Test**
+The Spoof Test is a tool to verify that your compass and the arrow-drawing logic are working perfectly, independent of any real-world GPS or LoRa issues.
+
+When you start a test, it creates a fake target exactly 1km away in a perfect cardinal direction (North, East, South, or West) from your current location.
+
+**How to Run the Test:**
+1.  Navigate to `Friend Finder` -> `Dev Tools` -> `Run Spoof Test`.
+2.  Select a target to track, for example, **"Track East"**.
+3.  Physically point the top of your device towards **True North** (your compass screen should read 0°).
+4.  The arrow on the tracking screen should now point directly to the **right** (90°). If it does, your UI is behaving as expected.
 
 ---
 ## 🧭 A Guide to Magnetometer Calibration
@@ -186,10 +236,10 @@ The calibration menu has a few other useful tools:
 
 Please be aware that this entire project is a **work in progress**.
 
--   **Source Code**: The source code is avalible [**HERE**](https://github.com/LeapYeet/firmware). 
-The module files are at src -> modules -> FriendFinderModule.cpp.
+-   **Source Code**: The source code is available [**HERE**](https://github.com/LeapYeet/firmware). The module files are at `src/modules/FriendFinderModule.cpp`.
 -   **End Goal**: The ultimate goal is to refine this module and merge it with the official Meshtastic firmware repository so everyone can benefit from it.
--   **Testing Needed**: Before an official merge is possible, extensive testing is required across different devices, hardware configurations, and LoRa settings. Community feedback and testing are highly encouraged!
+-   **Testing Needed**: Before an official merge is possible, extensive testing is required. Community feedback and testing are highly encouraged!
+-   **Community Support**: Special thanks to contributor **Nullvoid3771** for testing and confirming support for the LilyGo T-LoRa T3-S3 V1. The project owner is willing to investigate pin definitions and create new web flasher builds for other devices upon request. Please open an issue on GitHub to start the process.
 
 ---
 
