@@ -26,6 +26,7 @@ It was developed and tested in real-world conditions, including a crowded outdoo
 The easiest way to get started is by using the custom web flasher. It handles everything for you.
 
 ### **➡️ [Install via Web Flasher](https://leapyeet.github.io/Meshtastic-Firmware-Friend-Finder-Edition/)**
+### **➡️ [Source Code HERE](https://github.com/LeapYeet/firmware)**
 
 Once installed, here's how to get up and running:
 1.  **Calibrate the Compass:** A proper calibration is **essential** for the arrow to be accurate. Follow the detailed [**Calibration Guide**](#-a-guide-to-magnetometer-calibration) below.
