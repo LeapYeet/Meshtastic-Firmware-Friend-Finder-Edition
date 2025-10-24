@@ -1,6 +1,7 @@
 {
-  "name": "Meshtastic - Friend Finder (Heltec v3)",
+  "name": "Meshtastic - Friend Finder (Heltec v4)",
   "version": "2.7-FF",
+  "new_install_prompt_erase": true,
   "builds": [
     {
       "chipFamily": "ESP32-S3",
@@ -12,4 +13,3 @@
     }
   ]
 }
-
